@@ -240,6 +240,12 @@
 	
 }
 
+- (BOOL)becomeFirstResponder
+{
+	[super becomeFirstResponder];
+	return [internalTextView becomeFirstResponder];
+}
+
 -(BOOL)resignFirstResponder
 {
 	[super resignFirstResponder];
