@@ -62,7 +62,9 @@
 	textView.font = [UIFont boldSystemFontOfSize:15.0f];
 	textView.delegate = self;
 	//textView.animateHeightChange = NO; //turns off animation
-		
+	textView.backgroundColor = [UIColor colorWithRed:216/256.0f green:221/256.0f blue:225/256.0f alpha:1];
+	textView.background = [[UIImage imageNamed:@"rounded-textfield-bg.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:12];
+
 	[self.view addSubview:textView];
 	[textView sizeToFit];
 	

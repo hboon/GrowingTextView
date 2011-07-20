@@ -45,6 +45,9 @@
 @synthesize animateHeightChange;
 @synthesize returnKeyType;
 
+@synthesize background;
+@synthesize backgroundImageView;
+
 
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
@@ -82,12 +85,32 @@
 	self.frame = r;
 }
 
+
+-(void)resizeInternalTextViewForScrolling:(CGRect)r {
+	CGFloat xInset = 9;
+	CGFloat topInset = 4;
+	CGFloat bottomInset = 5;
+	internalTextView.frame = CGRectMake(r.origin.x+xInset, topInset, r.size.width-2*xInset, r.size.height-topInset-bottomInset);
+	self.backgroundImageView.frame = CGRectMake(9, 3, r.size.width-2*9, r.size.height-5);
+}
+
+
 -(void)setFrame:(CGRect)aframe
 {
 	CGRect r = aframe;
 	r.origin.y = 0;
 	r.origin.x = 0;
 	internalTextView.frame = r;
+
+	if (internalTextView.contentSize.height > maxHeight) {
+		[self resizeInternalTextViewForScrolling:aframe];
+	} else {
+		CGFloat xInset = 9;
+		CGFloat topInset = 0;
+		CGFloat bottomInset = 5;
+		internalTextView.frame = CGRectMake(r.origin.x+xInset, topInset, r.size.width-2*xInset, r.size.height-topInset-bottomInset);
+		self.backgroundImageView.frame = CGRectMake(9, 3, r.size.width-2*9, r.size.height-5);
+	}
 	
 	[super setFrame:aframe];
 }
@@ -178,10 +201,6 @@
 			internalTextViewFrame.size.height = newSizeH; // + padding
 			self.frame = internalTextViewFrame;
 			
-			internalTextViewFrame.origin.y = 0;
-			internalTextViewFrame.origin.x = 0;
-			internalTextView.frame = internalTextViewFrame;
-			
 			if(animateHeightChange){
 				[UIView commitAnimations];
 			}			
@@ -193,6 +212,8 @@
         // around and enable scrolling
 		if (newSizeH >= maxHeight)
 		{
+			[self resizeInternalTextViewForScrolling:self.frame];
+
 			if(!internalTextView.scrollEnabled){
 				internalTextView.scrollEnabled = YES;
 				[internalTextView flashScrollIndicators];
@@ -227,7 +248,25 @@
 
 - (void)dealloc {
 	[internalTextView release];
+	self.background = nil;
+	self.backgroundImageView = nil;
     [super dealloc];
+}
+
+#pragma mark Background image
+
+- (void)setBackground:(UIImage*)anImage {
+	if (anImage == self.background) return;
+
+	[background release];
+	background = [anImage retain];
+
+	internalTextView.backgroundColor = [UIColor clearColor];
+	if (!self.backgroundImageView) {
+		self.backgroundImageView = [[[UIImageView alloc] initWithFrame:internalTextView.frame] autorelease];
+		[self insertSubview:self.backgroundImageView belowSubview:internalTextView];
+	}
+	self.backgroundImageView.image = self.background;
 }
 
 

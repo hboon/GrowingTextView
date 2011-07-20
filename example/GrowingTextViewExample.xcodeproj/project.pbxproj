@@ -16,6 +16,8 @@
 		28D7ACF80DDB3853001CB0EB /* GrowingTextViewExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* GrowingTextViewExampleViewController.m */; };
 		C87648A613D682E400006887 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C87648A313D682E400006887 /* HPGrowingTextView.m */; };
 		C87648A713D682E400006887 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = C87648A513D682E400006887 /* HPTextViewInternal.m */; };
+		C87648A913D6852300006887 /* rounded-textfield-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C87648A813D6852300006887 /* rounded-textfield-bg@2x.png */; };
+		C87648AF13D685DA00006887 /* rounded-textfield-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C87648AE13D685DA00006887 /* rounded-textfield-bg.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		C87648A313D682E400006887 /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
 		C87648A413D682E400006887 /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
 		C87648A513D682E400006887 /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
+		C87648A813D6852300006887 /* rounded-textfield-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rounded-textfield-bg@2x.png"; sourceTree = "<group>"; };
+		C87648AE13D685DA00006887 /* rounded-textfield-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rounded-textfield-bg.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +99,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C87648AE13D685DA00006887 /* rounded-textfield-bg.png */,
+				C87648A813D6852300006887 /* rounded-textfield-bg@2x.png */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* GrowingTextViewExample-Info.plist */,
 			);
@@ -173,6 +179,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				C87648A913D6852300006887 /* rounded-textfield-bg@2x.png in Resources */,
+				C87648AF13D685DA00006887 /* rounded-textfield-bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

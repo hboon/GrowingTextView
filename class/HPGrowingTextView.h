@@ -71,6 +71,9 @@
 	BOOL editable;
 	UIDataDetectorTypes dataDetectorTypes;
 	UIReturnKeyType returnKeyType;
+
+	UIImage* background;
+	UIImageView* backgroundImageView;
 }
 
 //real class properties
@@ -78,6 +81,8 @@
 @property int minNumberOfLines;
 @property BOOL animateHeightChange;
 @property (retain) UITextView *internalTextView;	
+@property (nonatomic,retain) UIImage* background;
+@property (nonatomic,retain) UIImageView* backgroundImageView;
 
 
 //uitextview properties
