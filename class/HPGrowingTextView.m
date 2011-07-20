@@ -35,15 +35,7 @@
 @synthesize minNumberOfLines;
 @synthesize delegate;
 
-@synthesize text;
-@synthesize font;
-@synthesize textColor;
-@synthesize textAlignment; 
-@synthesize selectedRange;
-@synthesize editable;
-@synthesize dataDetectorTypes; 
 @synthesize animateHeightChange;
-@synthesize returnKeyType;
 
 @synthesize background;
 @synthesize backgroundImageView;

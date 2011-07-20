@@ -63,14 +63,6 @@
 	
 	//uitextview properties
 	NSObject <HPGrowingTextViewDelegate> *delegate;
-	NSString *text;
-	UIFont *font;
-	UIColor *textColor;
-	UITextAlignment textAlignment; 
-	NSRange selectedRange;
-	BOOL editable;
-	UIDataDetectorTypes dataDetectorTypes;
-	UIReturnKeyType returnKeyType;
 
 	UIImage* background;
 	UIImageView* backgroundImageView;
