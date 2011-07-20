@@ -157,6 +157,8 @@
 
 
 - (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+
 	[textView release];
     [super dealloc];
 }
