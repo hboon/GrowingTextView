@@ -52,7 +52,8 @@
 		internalTextView.delegate = self;
 		internalTextView.scrollEnabled = NO;
 		internalTextView.font = [UIFont fontWithName:@"Helvetica" size:13]; 
-		internalTextView.contentInset = UIEdgeInsetsZero;		
+		internalTextView.contentInset = UIEdgeInsetsZero;
+		internalTextView.scrollIndicatorInsets = UIEdgeInsetsMake(8, 0, 8, 0);
 		internalTextView.showsHorizontalScrollIndicator = NO;
 		internalTextView.text = @"-";
 		[self addSubview:internalTextView];
