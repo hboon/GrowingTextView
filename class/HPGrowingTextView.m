@@ -54,12 +54,22 @@
 		internalTextView.font = [UIFont fontWithName:@"Helvetica" size:13]; 
 		internalTextView.contentInset = UIEdgeInsetsZero;		
 		internalTextView.showsHorizontalScrollIndicator = NO;
+		internalTextView.scrollIndicatorInsets = UIEdgeInsetsMake(8, 0, 8, 0);
 		internalTextView.text = @"-";
 		[self addSubview:internalTextView];
 		
 		UIView *internal = (UIView*)[[internalTextView subviews] objectAtIndex:0];
 		minHeight = internal.frame.size.height;
 		minNumberOfLines = 1;
+		
+		//Add a 1px line at the top of the view.
+		r.origin.y = -1;
+		r.size.height = 1;
+		UIView *tempLineView = [[UIView alloc] initWithFrame:r];
+		tempLineView.backgroundColor = [UIColor lightGrayColor];
+		
+		[self addSubview:tempLineView];
+		[tempLineView release];
 		
 		animateHeightChange = YES;
 		

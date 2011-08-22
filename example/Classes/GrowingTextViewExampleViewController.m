@@ -53,7 +53,7 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
 	self.view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]] autorelease];
-	self.view.backgroundColor = [UIColor grayColor];
+	self.view.backgroundColor = [UIColor whiteColor];
 	
 	textView = [[HPGrowingTextView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
 	textView.minNumberOfLines = 1;
