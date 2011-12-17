@@ -27,8 +27,30 @@
 
 #import "HPTextViewInternal.h"
 
+#define PLACEHOLDER_LABEL_TAG 999
+
+@interface HPTextViewInternal()
+
+@property(nonatomic,retain) UILabel* placeHolderLabel;
+
+@end
+
 
 @implementation HPTextViewInternal
+
+@synthesize placeHolderLabel;
+@synthesize placeholderColor;
+@synthesize placeholder;
+
+- (id)initWithFrame:(CGRect)frame {
+	if  (self = [super initWithFrame:frame]) {
+		self.placeholder = @"";
+		self.placeholderColor = [UIColor colorWithRed:179/255.0 green:179/255.0 blue:179/255.0 alpha:1.0];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChanged:) name:UITextViewTextDidChangeNotification object:nil];
+	}
+
+	return self;
+}
 
 -(void)setContentOffset:(CGPoint)s
 {
@@ -57,10 +79,64 @@
 	[super setContentInset:insets];
 }
 
-
 - (void)dealloc {
-    [super dealloc];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+
+	self.placeHolderLabel = nil;
+	self.placeholderColor = nil;
+	self.placeholder = nil;
+
+	[super dealloc];
 }
 
+- (void)textChanged:(NSNotification*)notification {
+	if ([self.placeholder length] == 0) return;
+
+	if ([self.text length] == 0) {
+		[[self viewWithTag:PLACEHOLDER_LABEL_TAG] setAlpha:1];
+	} else {
+		[[self viewWithTag:PLACEHOLDER_LABEL_TAG] setAlpha:0];
+	}
+}
+
+
+- (void)drawRect:(CGRect)rect {
+	if ([self.placeholder length] > 0 ) {
+		self.placeHolderLabel.text = self.placeholder;
+		[self.placeHolderLabel sizeToFit];
+		[self sendSubviewToBack:self.placeHolderLabel];
+	}
+
+	if( [self.text length] == 0 && [self.placeholder length] > 0 )
+	{
+		[self viewWithTag:PLACEHOLDER_LABEL_TAG].alpha = 1;
+	}
+
+	[super drawRect:rect];
+}
+
+#pragma mark Accessors
+
+- (void)setText:(NSString*)text {
+	 [super setText:text];
+	 [self textChanged:nil];
+}
+
+
+- (UILabel*)placeHolderLabel {
+	if (placeHolderLabel == nil) {
+		placeHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, 8, self.bounds.size.width - 16, 0)];
+		placeHolderLabel.lineBreakMode = UILineBreakModeWordWrap;
+		placeHolderLabel.numberOfLines = 0;
+		placeHolderLabel.font = self.font;
+		placeHolderLabel.backgroundColor = [UIColor clearColor];
+		placeHolderLabel.textColor = self.placeholderColor;
+		placeHolderLabel.alpha = 0;
+		placeHolderLabel.tag = PLACEHOLDER_LABEL_TAG;
+		[self addSubview:placeHolderLabel];
+	}
+
+	return placeHolderLabel;
+}
 
 @end

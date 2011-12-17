@@ -88,6 +88,7 @@
 @property(nonatomic) UIDataDetectorTypes dataDetectorTypes __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_3_0);
 @property (nonatomic) UIReturnKeyType returnKeyType;
 @property (nonatomic) BOOL enablesReturnKeyAutomatically;
+@property (nonatomic,retain) NSString* placeholder;
 
 
 //uitextview methods
