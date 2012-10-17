@@ -31,7 +31,7 @@
 
 @interface HPTextViewInternal()
 
-@property(nonatomic,retain) UILabel* placeHolderLabel;
+@property(nonatomic,strong) UILabel* placeHolderLabel;
 
 @end
 
@@ -81,12 +81,6 @@
 
 - (void)dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-
-	self.placeHolderLabel = nil;
-	self.placeholderColor = nil;
-	self.placeholder = nil;
-
-	[super dealloc];
 }
 
 - (void)textChanged:(NSNotification*)notification {

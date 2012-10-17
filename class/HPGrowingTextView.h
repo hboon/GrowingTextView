@@ -54,31 +54,19 @@
 	
 	int minHeight;
 	int maxHeight;
-	
-	//class properties
-	int maxNumberOfLines;
-	int minNumberOfLines;
-	
-	BOOL animateHeightChange;
-	
-	//uitextview properties
-	NSObject <HPGrowingTextViewDelegate> *delegate;
-
-	UIImage* background;
-	UIImageView* backgroundImageView;
 }
 
 //real class properties
-@property int maxNumberOfLines;
-@property int minNumberOfLines;
-@property BOOL animateHeightChange;
-@property (retain) UITextView *internalTextView;	
-@property (nonatomic,retain) UIImage* background;
-@property (nonatomic,retain) UIImageView* backgroundImageView;
+@property (nonatomic) int maxNumberOfLines;
+@property (nonatomic) int minNumberOfLines;
+@property (nonatomic) BOOL animateHeightChange;
+@property (strong) UITextView *internalTextView;	
+@property (nonatomic,strong) UIImage* background;
+@property (nonatomic,strong) UIImageView* backgroundImageView;
 
 
 //uitextview properties
-@property(assign) NSObject<HPGrowingTextViewDelegate> *delegate;
+@property(nonatomic,assign) NSObject<HPGrowingTextViewDelegate> *delegate;
 @property(nonatomic,assign) NSString *text;
 @property(nonatomic,assign) UIFont *font;
 @property(nonatomic,assign) UIColor *textColor;
@@ -88,7 +76,7 @@
 @property(nonatomic) UIDataDetectorTypes dataDetectorTypes __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_3_0);
 @property (nonatomic) UIReturnKeyType returnKeyType;
 @property (nonatomic) BOOL enablesReturnKeyAutomatically;
-@property (nonatomic,retain) NSString* placeholder;
+@property (nonatomic,strong) NSString* placeholder;
 
 
 //uitextview methods

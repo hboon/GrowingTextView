@@ -69,7 +69,6 @@
 		tempLineView.backgroundColor = [UIColor lightGrayColor];
 		
 		[self addSubview:tempLineView];
-		[tempLineView release];
 		
 		animateHeightChange = YES;
 		
@@ -142,7 +141,6 @@
 	maxNumberOfLines = n;
 	
 	[test removeFromSuperview];
-	[test release];	
 }
 
 -(void)setMinNumberOfLines:(int)m
@@ -173,7 +171,6 @@
 	minNumberOfLines = m;
 	
 	[test removeFromSuperview];
-	[test release];
 }
 
 
@@ -254,24 +251,16 @@
 	return [internalTextView resignFirstResponder];
 }
 
-- (void)dealloc {
-	[internalTextView release];
-	self.background = nil;
-	self.backgroundImageView = nil;
-    [super dealloc];
-}
-
 #pragma mark Background image
 
 - (void)setBackground:(UIImage*)anImage {
 	if (anImage == self.background) return;
 
-	[background release];
-	background = [anImage retain];
+	background = anImage;
 
 	internalTextView.backgroundColor = [UIColor clearColor];
 	if (!self.backgroundImageView) {
-		self.backgroundImageView = [[[UIImageView alloc] initWithFrame:internalTextView.frame] autorelease];
+		self.backgroundImageView = [[UIImageView alloc] initWithFrame:internalTextView.frame];
 		[self insertSubview:self.backgroundImageView belowSubview:internalTextView];
 	}
 	self.backgroundImageView.image = self.background;
