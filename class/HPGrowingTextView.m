@@ -28,6 +28,11 @@
 #import "HPGrowingTextView.h"
 #import "HPTextViewInternal.h"
 
+@interface HPGrowingTextView()
+
+@property (nonatomic) CGFloat oldHeight;
+
+@end
 
 @implementation HPGrowingTextView
 @synthesize internalTextView;
@@ -82,6 +87,7 @@
 -(void)sizeToFit
 {
 	CGRect r = self.frame;
+	r.origin.y -= minHeight - r.size.height;
 	r.size.height = minHeight;
 	self.frame = r;
 }
@@ -109,7 +115,8 @@
 		CGFloat xInset = 9;
 		CGFloat topInset = 0;
 		CGFloat bottomInset = 5;
-		internalTextView.frame = CGRectMake(r.origin.x+xInset, topInset, r.size.width-2*xInset, r.size.height-topInset-bottomInset);
+		//internalTextView.frame = CGRectMake(r.origin.x+xInset, topInset, r.size.width-2*xInset, r.size.height-topInset-bottomInset);
+		internalTextView.frame = CGRectMake(r.origin.x+xInset, topInset, r.size.width-2*xInset, r.size.height);
 		self.backgroundImageView.frame = CGRectMake(9, 3, r.size.width-2*9, r.size.height-5);
 	}
 	
@@ -137,7 +144,7 @@
 	
 	[self addSubview:test];
 
-	maxHeight = test.contentSize.height;
+	maxHeight = [self heightThatFitLineCount:n];
 	maxNumberOfLines = n;
 	
 	[test removeFromSuperview];
@@ -165,12 +172,24 @@
 	
 	[self addSubview:test];
 	
-	minHeight = test.contentSize.height;
+	minHeight = 35;
 			
 	[self sizeToFit];	
 	minNumberOfLines = m;
 	
 	[test removeFromSuperview];
+}
+- (CGFloat)heightThatFitLineCount:(int)aNumber {
+	NSMutableString *newLines = [NSMutableString string];
+	if(aNumber == 1){
+		[newLines appendString:@"-"];
+	} else {
+		for(int i = 1; i<aNumber; i++){
+			[newLines appendString:@"\n"];
+		}
+	}
+	CGFloat results = [newLines sizeWithFont:internalTextView.font forWidth:internalTextView.frame.size.width lineBreakMode:NSLineBreakByWordWrapping].height * aNumber;
+	return results;
 }
 
 
@@ -477,6 +496,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)textViewDidChangeSelection:(UITextView *)textView {
+	CGRect rect = [internalTextView.text boundingRectWithSize:CGSizeMake(internalTextView.frame.size.width, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:internalTextView.font} context:nil];
+	minHeight = rect.size.height+20;
+	[self sizeToFit];
 	if ([delegate respondsToSelector:@selector(growingTextViewDidChangeSelection:)]) {
 		[delegate growingTextViewDidChangeSelection:self];
 	}
